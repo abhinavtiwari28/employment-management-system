@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employment Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Employment Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#addEmployeeModal">Add New Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#searchEmployeeModal">Search Employee</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addEmployeeForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <input type="text" class="form-control" id="department" placeholder="Enter department">
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Position</label>
+                            <input type="text" class="form-control" id="position" placeholder="Enter position">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Employee</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="searchEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="searchEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchEmployeeModalLabel">Search Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="searchEmployeeForm">
+                        <div class="form-group">
+                            <label for="search">Search by name or department</label>
+                            <input type="text" class="form-control" id="search" placeholder="Enter search term">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editEmployeeForm">
+                        <div class="form-group">
+                            <label for="editName">Name</label>
+                            <input type="text" class="form-control" id="editName" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDepartment">Department</label>
+                            <input type="text" class="form-control" id="editDepartment" placeholder="Enter department">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPosition">Position</label>
+                            <input type="text" class="form-control" id="editPosition" placeholder="Enter position">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteEmployeeModalLabel">Delete Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this employee?</p>
+                    <button type="button" class="btn btn-primary" id="deleteEmployeeBtn">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table" id="employeeTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="employeeTableBody">
+            <!-- employees will be listed here -->
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let employees = [
+            { name: 'WWW', department: 'Sales', position: 'Manager' },
+            { name: 'AAA', department: 'Marketing', position: 'Director' },
+            { name: 'XXX', department: 'IT', position: 'Developer' }
+        ];
+
+        $(document).ready(function() {
+            listEmployees();
+            $('#addEmployeeForm').submit(function(e) {
+                e.preventDefault();
+                let name = $('#name').val();
+                let department = $('#department').val();
+                let position = $('#position').val();
+                employees.push({ name, department, position });
+                listEmployees();
+                $('#addEmployeeModal').modal('hide');
+            });
+            $('#searchEmployeeForm').submit(function(e) {
+                e.preventDefault();
+                let search = $('#search').val();
+                let results = employees.filter(employee => employee.name.includes(search) || employee.department.includes(search));
+                listEmployees(results);
+            });
+            $(document).on('click', '.edit-btn', function() {
+                let index = $(this).data('index');
+                let employee = employees[index];
+                $('#editName').val(employee.name);
+                $('#editDepartment').val(employee.department);
+                $('#editPosition').val(employee.position);
+                $('#editEmployeeForm').data('index', index);
+                $('#editEmployeeModal').modal('show');
+            });
+            $('#editEmployeeForm').submit(function(e) {
+                e.preventDefault();
+                let index = $(this).data('index');
+                let name = $('#editName').val();
+                let department = $('#editDepartment').val();
+                let position = $('#editPosition').val();
+                employees[index] = { name, department, position };
+                listEmployees();
+                $('#editEmployeeModal').modal('hide');
+            });
+            $(document).on('click', '.delete-btn', function() {
+                let index = $(this).data('index');
+                $('#deleteEmployeeBtn').data('index', index);
+                $('#deleteEmployeeModal').modal('show');
+            });
+            $('#deleteEmployeeBtn').click(function() {
+                let index = $(this).data('index');
+                employees.splice(index, 1);
+                listEmployees();
+                $('#deleteEmployeeModal').modal('hide');
+            });
+        });
+
+        function listEmployeesFILTERED(results) {
+            $('#employeeTableBody').empty();
+            $.each(results, function(index, employee) {
+                let row = $('<tr>');
+                row.append($('<td>').text(employee.name));
+                row.append($('<td>').text(employee.department));
+                row.append($('<td>').text(employee.position));
+                let actions = $('<td>');
+                actions.append($('<button class="btn btn-primary edit-btn" data-index="' + index + '">Edit</button>'));
+                actions.append($('<button class="btn btn-danger delete-btn" data-index="' + index + '">Delete</button>'));
+                row.append(actions);
+                $('#employeeTableBody').append(row);
+            });
+        }
+
+        function listEmployees(results = employees) {
+            $('#employeeTableBody').empty();
+            $.each(results, function(index, employee) {
+                let row = $('<tr>');
+                row.append($('<td>').text(employee.name));
+                row.append($('<td>').text(employee.department));
+                row.append($('<td>').text(employee.position));
+                let actions = $('<td>');
+                actions.append($('<button class="btn btn-primary edit-btn" data-index="' + index + '">Edit</button>'));
+                actions.append($('<button class="btn btn-danger delete-btn" data-index="' + index + '">Delete</button>'));
+                row.append(actions);
+                $('#employeeTableBody').append(row);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
